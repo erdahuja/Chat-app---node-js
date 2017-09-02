@@ -3,13 +3,19 @@
   "version": "0.0.0",
   "description": "A chat example to showcase how to use `socket.io` with a static `express` server with `async` for control flow.",
   "main": "server.js",
-  "repository": "",
-  "author": "Mostafa Eweda <mo.eweda@gmail.com>",
+  "scripts":{
+    "start": "nodemon server.js"
+
+  },
+
+  "repository": "https://github.com/erdahuja/Chat-app---node-js",
+  "author": "Deepak Ahuja",
   "dependencies": {
     "EventEmitter": "^1.0.0",
     "async": "~0.2.8",
     "express": "~3.2.4",
     "mime": "^1.4.0",
+    "nodemon": "^1.11.0",
     "socket.io": "^0.9.19"
   }
 }
