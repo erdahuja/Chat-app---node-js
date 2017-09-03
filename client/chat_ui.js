@@ -29,6 +29,12 @@ var socket = io.connect();
 $(document).ready(function () {
 	var chatApp = new Chat(socket);
 
+	socket.on('user-left',function(text){
+
+		console.log(text);
+		$('#messages').append(divSystemContentElement('User left :'+text.text));
+	})
+
 	socket.on('nameResult', function (result) {
 		var message;
 		if (result.success) {

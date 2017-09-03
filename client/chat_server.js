@@ -10,6 +10,7 @@ exports.listen = function(server) {
 	io.set('log level', 1);
 
 	io.sockets.on('connection', function(socket) {
+		console.log("connected",socket.id);
 		guestNumber = assignGuestName(socket, guestNumber, nickNames, namesUsed);
 		joinRoom(socket, 'Lobby');
 
@@ -33,6 +34,7 @@ function assignGuestName(socket, guestNumber, nickNames, namesUsed) {
 		name: name
 	});
 	namesUsed.push(name);
+	console.log(namesUsed);
 	return guestNumber + 1;
 }
 
@@ -111,6 +113,12 @@ function handleRoomJoining(socket) {
 function handleClientDisconnection(socket) {
 	socket.on('disconnect', function() {
 		var nameIndex = namesUsed.indexOf(nickNames[socket.id]);
+
+		console.log(currentRoom[socket.id])
+		socket.broadcast.to(currentRoom[socket.id]).emit('user-left',{
+			text:nickNames[socket.id]
+
+		})
 		delete namesUsed[nameIndex];
 		delete nickNames[socket.id];
 	});
